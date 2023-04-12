@@ -1,0 +1,16 @@
+start_ip = "192.168.8.10"
+end_ip = "192.168.15.253"
+
+# Convert the start and end IP addresses to integers
+start_ip_int = int(''.join([bin(int(x)+256)[3:] for x in start_ip.split('.')]), 2)
+end_ip_int = int(''.join([bin(int(x)+256)[3:] for x in end_ip.split('.')]), 2)
+
+# Generate a list of all the IP addresses in the range
+ip_addresses = []
+for ip_int in range(start_ip_int, end_ip_int+1):
+    # Convert the integer back to the dotted-quad IP format
+    ip_address = '.'.join([str(int(ip_int / 256**i) % 256) for i in range(4)][::-1])
+    ip_addresses.append(ip_address)
+
+# Print the list of IP addresses
+print(ip_addresses)
